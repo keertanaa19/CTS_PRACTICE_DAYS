@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Local Community Event Portal</title>
+
+<style>
+
+body{
+    font-family: Arial;
+    background-color: #f0f0f0;
+    margin: 20px;
+}
+
+/* Navigation */
+
+nav{
+    background-color: navy;
+    padding: 10px;
+}
+
+nav a{
+    color: white;
+    text-decoration: none;
+    margin: 15px;
+}
+
+/* Welcome Banner */
+
+#welcomeBanner{
+    background-color: blue;
+    color: white;
+    padding: 20px;
+    margin-top: 10px;
+}
+
+.highlight{
+    color: red;
+    font-weight: bold;
+}
+
+/* Gallery */
+
+.imgStyle{
+    width: 150px;
+    height: 100px;
+    border: 3px solid black;
+}
+
+/* Form */
+
+form{
+    background-color: white;
+    padding: 20px;
+    width: 350px;
+    border: 2px solid gray;
+}
+
+/* Responsive */
+
+@media screen and (max-width:768px){
+
+    nav a{
+        display: block;
+        margin: 10px 0;
+    }
+
+    .imgStyle{
+        width: 100%;
+    }
+}
+
+</style>
+
+<script>
+
+/* Form Output */
+
+function showMessage(){
+
+    document.getElementById("msg").value =
+    "Registration Successful!";
+}
+
+/* Phone Validation */
+
+function validatePhone(){
+
+    alert("Phone Number Validated");
+}
+
+/* Event Fee */
+
+function showFee(){
+
+    var fee=document.getElementById("eventType").value;
+
+    document.getElementById("fee").innerHTML =
+    "Event Fee: " + fee;
+}
+
+/* Image Enlarge */
+
+function enlarge(img){
+
+    img.style.width="300px";
+    img.style.height="200px";
+}
+
+/* Character Count */
+
+function countChars(){
+
+    var len=document.getElementById("feedback").value.length;
+
+    document.getElementById("count").innerHTML =
+    "Characters: " + len;
+}
+
+/* Video Ready */
+
+function videoReady(){
+
+    alert("Video ready to play");
+}
+
+/* Save Preference */
+
+function savePreference(){
+
+    var event=document.getElementById("eventName").value;
+
+    localStorage.setItem("preferredEvent",event);
+}
+
+/* Load Preference */
+
+function loadPreference(){
+
+    var saved=localStorage.getItem("preferredEvent");
+
+    if(saved){
+
+        document.getElementById("eventName").value=saved;
+    }
+}
+
+/* Clear Storage */
+
+function clearPreferences(){
+
+    localStorage.clear();
+    sessionStorage.clear();
+
+    alert("Preferences Cleared");
+}
+
+/* Geolocation */
+
+function findLocation(){
+
+    if(navigator.geolocation){
+
+        navigator.geolocation.getCurrentPosition(
+            showPosition,
+            showError,
+            {enableHighAccuracy:true}
+        );
+
+    }else{
+
+        alert("Geolocation not supported");
+    }
+}
+
+function showPosition(position){
+
+    document.getElementById("location").innerHTML=
+    "Latitude: " + position.coords.latitude +
+    "<br>Longitude: " + position.coords.longitude;
+}
+
+function showError(){
+
+    alert("Location access denied");
+}
+
+/* Warning before leaving */
+
+window.onbeforeunload=function(){
+
+    return "Form not completed!";
+}
+
+</script>
+
+</head>
+
+<body onload="loadPreference()">
+
+<!-- Navigation -->
+
+<nav>
+
+<a href="#home">Home</a>
+<a href="#events">Events</a>
+<a href="#gallery">Gallery</a>
+<a href="#contact">Contact</a>
+
+</nav>
+
+<!-- Home -->
+
+<section id="home">
+
+<div id="welcomeBanner">
+
+<h1>Welcome to Community Event Portal</h1>
+
+<span class="highlight">
+Special Summer Offer!
+</span>
+
+</div>
+
+</section>
+
+<br>
+
+<!-- Events -->
+
+<section id="events">
+
+<h2>Upcoming Events</h2>
+
+<ul>
+
+<li>Music Festival</li>
+<li>Food Carnival</li>
+<li>Sports Meet</li>
+
+</ul>
+
+</section>
+
+<br>
+
+<!-- Gallery -->
+
+<section id="gallery">
+
+<h2>Event Gallery</h2>
+
+<table border="1">
+
+<tr>
+
+<td>
+<img src="event1.jpg"
+class="imgStyle"
+ondblclick="enlarge(this)">
+</td>
+
+<td>
+<img src="event2.jpg"
+class="imgStyle"
+ondblclick="enlarge(this)">
+</td>
+
+<td>
+<img src="event3.jpg"
+class="imgStyle"
+ondblclick="enlarge(this)">
+</td>
+
+</tr>
+
+</table>
+
+</section>
+
+<br>
+
+<!-- Registration Form -->
+
+<section id="contact">
+
+<h2>Event Registration</h2>
+
+<form>
+
+Name:<br>
+<input type="text"
+placeholder="Enter Name"
+required autofocus>
+
+<br><br>
+
+Phone:<br>
+<input type="text"
+onblur="validatePhone()">
+
+<br><br>
+
+Email:<br>
+<input type="email"
+placeholder="Enter Email"
+required>
+
+<br><br>
+
+Date:<br>
+<input type="date">
+
+<br><br>
+
+Event Type:<br>
+
+<select id="eventType" onchange="showFee()">
+
+<option value="100">Music</option>
+<option value="200">Sports</option>
+<option value="150">Food</option>
+
+</select>
+
+<p id="fee"></p>
+
+<br>
+
+Preferred Event:<br>
+
+<select id="eventName" onchange="savePreference()">
+
+<option>Music</option>
+<option>Sports</option>
+<option>Food</option>
+
+</select>
+
+<br><br>
+
+Feedback:<br>
+
+<textarea id="feedback"
+onkeyup="countChars()"></textarea>
+
+<p id="count">Characters: 0</p>
+
+<button type="button"
+onclick="showMessage()">
+
+Submit
+
+</button>
+
+<output id="msg"></output>
+
+</form>
+
+<br>
+
+<button onclick="clearPreferences()">
+Clear Preferences
+</button>
+
+</section>
+
+<br>
+
+<!-- Video -->
+
+<section>
+
+<h2>Event Promo Video</h2>
+
+<video width="400"
+controls
+oncanplay="videoReady()">
+
+<source src="video.mp4" type="video/mp4">
+
+</video>
+
+</section>
+
+<br>
+
+<!-- Geolocation -->
+
+<section>
+
+<h2>Find Nearby Events</h2>
+
+<button onclick="findLocation()">
+Find Nearby Events
+</button>
+
+<p id="location"></p>
+
+</section>
+
+<!-- Footer -->
+
+<footer>
+
+<p>© 2026 Community Event Portal</p>
+
+</footer>
+
+</body>
+</html>

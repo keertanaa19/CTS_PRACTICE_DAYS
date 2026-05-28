@@ -1,0 +1,29 @@
+/* Link Styling */
+
+a:link{
+    color: blue;
+}
+
+a:hover{
+    color: red;
+}
+
+a:active{
+    color: green;
+}
+
+a:visited{
+    color: purple;
+}
+
+/* Navigation List */
+
+nav ul{
+    list-style-type: none;
+}
+
+nav ul li{
+    display: inline;
+    padding: 10px;
+    margin: 5px;
+}

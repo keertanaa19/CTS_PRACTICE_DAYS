@@ -1,0 +1,47 @@
+<html>
+<head>
+<style>
+    form{
+        border: 2px solid black;
+        padding: 20px;
+        width: 350px;
+        margin: 20px auto;
+        background-color: #ffffff;
+    }
+</style>
+<script>
+function findLocation(){
+    if(navigator.geolocation){
+        navigator.geolocation.getCurrentPosition(
+            showPosition,
+            showError,
+            {enableHighAccuracy:true, timeout:5000}
+        );
+    }else{
+        alert("Geolocation not supported");
+    }
+}
+
+function showPosition(position){
+
+    document.getElementById("location").innerHTML=
+    "Latitude: " + position.coords.latitude +
+    "<br>Longitude: " + position.coords.longitude;
+}
+
+function showError(error){
+
+    alert("Error getting location");
+}
+</script>
+</head>
+
+<body>
+<form>
+<button onclick="findLocation()">
+Find Nearby Events
+</button>
+<p id="location"></p>
+</form>
+</body>
+</html>

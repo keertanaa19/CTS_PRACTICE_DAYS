@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+form{
+    border: 2px solid black;
+    padding: 20px;
+    width: 350px;
+    margin: 20px auto;
+    background-color: #ffffff;
+}
+</style>
+
+<script>
+function showMessage(){
+    document.getElementById("msg").value ="Registration Successful!";
+}
+</script>
+</head>
+
+<body>
+<form>
+Name:
+<input type="text" placeholder="Enter Name"
+required autofocus><br><br>
+
+Email:
+<input type="email" placeholder="Enter Email"
+required><br><br>
+
+Date:
+<input type="date" required><br><br>
+
+Event Type:
+<select>
+    <option>Music</option>
+    <option>Sports</option>
+    <option>Food</option>
+</select><br><br>
+
+Message:
+<textarea placeholder="Enter message"></textarea><br><br>
+
+<button type="button" onclick="showMessage()">Submit</button>
+
+<output id="msg"></output>
+
+</form>
+</body>
+</html>
