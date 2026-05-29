@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Community Event Portal</title>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+<style>
+body{
+    font-family: Arial, sans-serif;
+    background:#f4f4f4;
+    margin:0;
+    padding:20px;
+}
+
+h1{
+    text-align:center;
+    color:#333;
+}
+
+.container{
+    max-width:1000px;
+    margin:auto;
+}
+
+.card{
+    background:white;
+    padding:15px;
+    margin:10px 0;
+    border-radius:10px;
+    box-shadow:0 2px 5px rgba(0,0,0,0.2);
+}
+
+button{
+    padding:10px 15px;
+    border:none;
+    background:#007bff;
+    color:white;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#0056b3;
+}
+
+input, select{
+    padding:10px;
+    margin:5px;
+    width:250px;
+}
+
+#error{
+    color:red;
+}
+
+#loading{
+    display:none;
+    color:green;
+    font-weight:bold;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<h1>Local Community Event Portal</h1>
+
+<input type="text" id="searchBox" placeholder="Search event by name">
+
+<select id="categoryFilter">
+    <option value="All">All</option>
+    <option value="Music">Music</option>
+    <option value="Workshop">Workshop</option>
+    <option value="Sports">Sports</option>
+</select>
+
+<div id="loading">Loading Events...</div>
+
+<div id="eventsContainer"></div>
+
+<h2>Event Registration Form</h2>
+
+<form id="regForm">
+    <input type="text" name="username" placeholder="Enter Name">
+    <input type="email" name="email" placeholder="Enter Email">
+
+    <select name="selectedEvent" id="selectedEvent"></select>
+
+    <button type="submit">Submit</button>
+</form>
+
+<p id="error"></p>
+
+<button id="registerBtn">Fade Event Cards</button>
+
+</div>
+
+<script src="main.js"></script>
+
+</body>
+</html>
